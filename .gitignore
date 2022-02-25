@@ -25,10 +25,10 @@ auto-save-list
 dist/
 flycheck_*.el
 godot/*.translation
-godot/.import/
-godot/.mono/
-godot/data_*/
-godot/export.cfg
+game/.import/
+game/.mono/
+game/data_*/
+game/export.cfg
 rust/**/*.rs.bk
 rust/Cargo.lock
 rust/debug/

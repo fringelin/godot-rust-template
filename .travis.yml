@@ -7,7 +7,7 @@ before_install:
 jobs:
   fast_finish: true
   include:
-  - name: "godot-rust-template test"
+  - name: "game-rust-template test"
     if: type = push
     env: RUST_BACKTRACE=1
     script: bash sh/test-template.sh

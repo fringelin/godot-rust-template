@@ -145,22 +145,22 @@ wasm
 {%-     endcase -%}
 {%-   endcapture %}
 [tasks.ps1-build-{{build_target}}-{{target_type}}]
-dependencies = ["clean"]
+# dependencies = ["clean"]
 script_runner = "@shell"
 script = '''
 cargo build --target {{build_target}} {{build_arg}}
-mv ../{{target_dir}}/{{build_target}}/{{target_type}}/*.{{lib_ext}} ../{{lib_dir}}/{{build_target}}
+rm -f ../{{lib_dir}}/{{build_target}}/*.{{lib_ext}} && mv ../{{target_dir}}/{{build_target}}/{{target_type}}/*.{{lib_ext}} ../{{lib_dir}}/{{build_target}}
 '''
 
 [tasks.sh-build-{{build_target}}-{{target_type}}]
-dependencies = ["clean"]
+# dependencies = ["clean"]
 script_runner = "@shell"
 script = '''
 cargo build --target {{build_target}} {{build_arg}}
 if [[ -f ../{{lib_dir}}/{{build_target}}/*.{{lib_ext}} ]]; then
   rm ../{{lib_dir}}/{{build_target}}/*.{{lib_ext}}
 fi
-mv ../{{target_dir}}/{{build_target}}/{{target_type}}/*.{{lib_ext}} ../{{lib_dir}}/{{build_target}}
+rm -f ../{{lib_dir}}/{{build_target}}/*.{{lib_ext}} && mv ../{{target_dir}}/{{build_target}}/{{target_type}}/*.{{lib_ext}} ../{{lib_dir}}/{{build_target}}
 '''
 
 [tasks.build-{{build_target}}-{{target_type}}]
@@ -185,7 +185,7 @@ args = ["audit"]
 [tasks.check]
 command = "cargo"
 args = ["check"]
-dependencies = ["clean"]
+# dependencies = ["clean"]
 
 [tasks.clean]
 command = "cargo"
@@ -208,7 +208,7 @@ mv -b *.keystore ..
 [tasks.doc]
 command = "cargo"
 args = ["doc", "--no-deps", "--open", "-v"]
-dependencies = ["clean"]
+# dependencies = ["clean"]
 
 [tasks.edit]
 script_runner = "@shell"
@@ -249,7 +249,7 @@ run_task = [
 [tasks.test]
 command = "cargo"
 args = ["test"]
-dependencies = ["clean"]
+# dependencies = ["clean"]
 
 [env]
 CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true

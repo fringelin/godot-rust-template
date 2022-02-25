@@ -1,3 +1,4 @@
 [workspace]
-exclude = ["godot"]
+resolver = "2"
+exclude = ["game"]
 members = ["rust"]

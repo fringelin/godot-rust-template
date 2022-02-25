@@ -31,16 +31,12 @@ impl Game {
     // Instead they are "attached" to the parent object, called the "owner".
     // The owner is passed to every single exposed method.
     #[export]
-    unsafe fn _ready(&mut self, _owner: &Spatial) {
+    fn _ready(&mut self, owner: TRef<Spatial>) {
         // The `godot_print!` macro works like `println!` but prints to the Godot-editor
         // output tab as well.
-        self.name = "Game".to_string();
+        let ecs = owner.get_node("/root/ECSController").unwrap();
+        let ecs = unsafe { ecs.assume_safe() };
+        unsafe { ecs.call("add_game_to_ecs", &[owner.owned_to_variant()]) };
         godot_print!("{} is ready!", self.name);
-    }
-
-    // This function will be called in every frame
-    #[export]
-    unsafe fn _process(&self, _owner: &Spatial, delta: f64) {
-        godot_print!("Inside {} _process(), delta is {}", self.name, delta);
     }
 }

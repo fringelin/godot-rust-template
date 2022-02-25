@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "",
+"class": "ECSController",
+"language": "NativeScript",
+"path": "res://native/ECSController.gdns"
+} ]
 _global_script_class_icons={
-
+"ECSController": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="{{project-name}}"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://assets/godot-ferris-32x32.png"
+
+[autoload]
+
+EcsController="*res://native/ECSController.gdns"
 
 [rendering]
 
