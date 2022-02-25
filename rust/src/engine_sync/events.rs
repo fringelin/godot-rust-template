@@ -1,6 +1,4 @@
-use crate::spinning::SpawnSpinningCube;
 use bevy::{ecs::system::Resource, prelude::World};
-use gdnative::api::MeshInstance;
 use gdnative::{
     api::{InputEvent, Node},
     prelude::{Ref, TRef},
@@ -48,13 +46,4 @@ pub fn spawn_game(world: &mut World, node: Ref<Node>) {
         .get_resource_mut::<bevy::app::Events<SpawnGame>>()
         .expect("No world spawn game event, did you forget to add Spawn Game into your events?")
         .send(SpawnGame(node));
-}
-
-pub fn spawn_spinning_cube(world: &mut World, node: Ref<MeshInstance>, speed: f32) {
-    world
-        .get_resource_mut::<bevy::app::Events<SpawnSpinningCube>>()
-        .expect(
-            "No Events<E> resource found. Did you forget to call `.init_resource` or `.add_event`?",
-        )
-        .send(SpawnSpinningCube((node.clone(), speed)));
 }

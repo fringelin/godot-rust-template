@@ -1,14 +1,12 @@
 mod app;
 mod ecs_controller;
 pub mod engine_sync;
-mod game;
 pub mod spinning;
 
 use gdnative::prelude::{godot_init, InitHandle};
 
 // Function that registers all exposed classes to Godot
 fn init(handle: InitHandle) {
-    handle.add_class::<game::Game>();
     handle.add_class::<ecs_controller::ECSController>();
 }
 

@@ -1,11 +1,12 @@
 use crate::app::get_ecs;
-use crate::engine_sync::events;
 use crate::engine_sync::{
     events::{spawn_game, update_delta_resource, user_input},
     resources::{IdleDelta, PhysicsDelta},
 };
+use crate::spinning::events::spawn_spinning_cube;
 use bevy::prelude::{App, Schedule, Stage, World};
 use gdnative::{api::MeshInstance, prelude::*};
+use gdrust::unsafe_functions::{RefExt, TRefExt};
 
 /// This ECSController acts as the middle man between Godot and Bevy, it's a singleton or "AutoLoad" script that
 /// creates the entire Bevy ECS. Also, "Project Settings > Rendering > Threading" to turn on multi threading, which will work
@@ -54,8 +55,13 @@ impl ECSController {
     }
 
     #[export]
-    fn add_node_to_ecs(&mut self, _owner: &Node, other: Ref<MeshInstance>, rotate_speed: f32) {
-        events::spawn_spinning_cube(&mut self.world, other, rotate_speed);
+    fn add_node_to_ecs(&mut self, _owner: &Node, other: Ref<Node>, rotate_speed: f32) {
+        let other = other.expect_safe();
+        spawn_spinning_cube(
+            &mut self.world,
+            other.cast::<MeshInstance>().unwrap().expect_shared(),
+            rotate_speed,
+        );
     }
 
     #[export]

@@ -1,9 +1,11 @@
 pub mod components;
+pub mod events;
 
-use crate::engine_sync::components::{GodotObjRef, PlayingGame};
+use crate::engine_sync::components::GodotObjRef;
 use crate::engine_sync::resources::PhysicsDelta;
 use crate::engine_sync::stages::SyncStages;
-use crate::spinning::components::{Cube, RotateSpeed, StartPosition, Time};
+use crate::spinning::components::{CountTime, Cube, RotateSpeed, StartPosition};
+use crate::spinning::events::{spawn_spinning_cube_listener, SpawnSpinningCube};
 use bevy::prelude::*;
 use gdnative::api::MeshInstance;
 use gdnative::prelude::*;
@@ -13,29 +15,8 @@ pub struct SpinningPlugin;
 impl Plugin for SpinningPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<SpawnSpinningCube>()
-            .add_system(spawn_spinning_cube)
+            .add_system(spawn_spinning_cube_listener)
             .add_system_to_stage(SyncStages::UpdateBevyPhysics, spinning_cube_sync);
-    }
-}
-
-pub struct SpawnSpinningCube(pub (Ref<MeshInstance>, f32));
-
-fn spawn_spinning_cube(
-    mut commands: Commands,
-    mut on_spawn_spinning_cube: EventReader<SpawnSpinningCube>,
-) {
-    if let Some(SpawnSpinningCube((mesh, speed))) = on_spawn_spinning_cube.iter().next() {
-        let mesh_instance = mesh.expect_safe();
-        mesh_instance.set_physics_process(true);
-
-        commands
-            .spawn()
-            .insert(GodotObjRef::new(mesh.clone()))
-            .insert(Cube)
-            .insert(RotateSpeed::new(*speed))
-            .insert(StartPosition::new(Vector3::ZERO))
-            .insert(Time::new(0.0))
-            .insert(PlayingGame);
     }
 }
 
@@ -46,7 +27,7 @@ fn spinning_cube_sync(
             &GodotObjRef<MeshInstance>,
             &StartPosition,
             &RotateSpeed,
-            &mut Time,
+            &mut CountTime,
         ),
         With<Cube>,
     >,

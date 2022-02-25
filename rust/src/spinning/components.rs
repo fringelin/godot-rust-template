@@ -13,7 +13,7 @@ pub struct StartPosition {
 
 #[single_value(extends = f32)]
 #[derive(Component)]
-pub struct Time {
+pub struct CountTime {
     pub value: f32,
 }
 
