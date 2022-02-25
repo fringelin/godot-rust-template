@@ -38,7 +38,7 @@
 {%- assign wasm32-unknown-emscripten-release = "wasm32-unknown-emscripten,HTML5,release" | split: "|" -%}
 {%- assign wasm_targets = wasm32-unknown-emscripten-debug | concat: wasm32-unknown-emscripten-release | compact -%}
 {%- assign all_targets = android_targets | concat: x86_linux_targets | concat: mac_osx_targets | concat: ios_targets | concat: windows_gnu_targets | concat: windows_msvc_targets | concat: wasm_targets | compact -%}
-{%- assign godot_project_path_arg = "--path ../godot/" -%}
+{%- assign godot_project_path_arg = "--path ../game/" -%}
 [tasks.build-debug]
 script_runner = "@shell"
 script = '''
@@ -173,7 +173,7 @@ run_task = [
 dependencies = ["build-{{build_target}}-{{target_type}}"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
+cd ../game/
 godot {{export_arg}} "{{export_target}}.{{build_target}}.{{target_type}}" ../{{bin_dir}}/{{build_target}}/{{exported_project}}
 '''
 {% endfor -%}
@@ -235,7 +235,7 @@ run_task = "run-godot"
 [tasks.run-godot]
 script_runner = "@shell"
 script = '''
-cd ../godot/
+cd ../game/
 godot -d
 '''
 
