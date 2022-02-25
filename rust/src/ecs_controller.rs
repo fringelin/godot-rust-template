@@ -1,10 +1,8 @@
-use crate::ecs::plugins::engine_sync::events;
-use crate::ecs::{
-    app::get_ecs,
-    plugins::engine_sync::{
-        events::{spawn_game, update_delta_resource, user_input},
-        resources::{IdleDelta, PhysicsDelta},
-    },
+use crate::app::get_ecs;
+use crate::engine_sync::events;
+use crate::engine_sync::{
+    events::{spawn_game, update_delta_resource, user_input},
+    resources::{IdleDelta, PhysicsDelta},
 };
 use bevy::prelude::{App, Schedule, Stage, World};
 use gdnative::{api::MeshInstance, prelude::*};

@@ -1,4 +1,4 @@
-use crate::ecs::plugins::spinning::SpawnSpinningCube;
+use crate::spinning::SpawnSpinningCube;
 use bevy::{ecs::system::Resource, prelude::World};
 use gdnative::api::MeshInstance;
 use gdnative::{

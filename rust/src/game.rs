@@ -1,10 +1,9 @@
 use gdnative::api::*;
 use gdnative::prelude::*;
+use gdrust::macros::gdrust;
 
 /// The Game "class"
-#[derive(NativeClass)]
-#[inherit(Spatial)]
-#[register_with(Self::register_builder)]
+#[gdrust(extends = Spatial)]
 pub struct Game {
     name: String,
 }
@@ -13,19 +12,6 @@ pub struct Game {
 // code to automatically bind any exported methods to Godot.
 #[methods]
 impl Game {
-    // Register the builder for methods, properties and/or signals.
-    fn register_builder(_builder: &ClassBuilder<Self>) {
-        godot_print!("Game builder is registered!");
-    }
-
-    /// The "constructor" of the class.
-    fn new(_owner: &Spatial) -> Self {
-        godot_print!("Game is created!");
-        Game {
-            name: "".to_string(),
-        }
-    }
-
     // In order to make a method known to Godot, the #[export] attribute has to be used.
     // In Godot script-classes do not actually inherit the parent class.
     // Instead they are "attached" to the parent object, called the "owner".

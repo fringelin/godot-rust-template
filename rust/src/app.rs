@@ -1,7 +1,7 @@
-use crate::ecs::plugins::spinning::SpinningPlugin;
+use crate::spinning::SpinningPlugin;
 use bevy::{diagnostic::DiagnosticsPlugin, log::LogPlugin, prelude::*};
 
-use super::plugins::engine_sync::EngineSyncPlugin;
+use crate::engine_sync::EngineSyncPlugin;
 
 pub fn get_ecs() -> App {
     let mut ecs = App::new();

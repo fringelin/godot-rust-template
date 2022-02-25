@@ -1,6 +1,8 @@
-mod ecs;
+mod app;
 mod ecs_controller;
+pub mod engine_sync;
 mod game;
+pub mod spinning;
 
 use gdnative::prelude::{godot_init, InitHandle};
 

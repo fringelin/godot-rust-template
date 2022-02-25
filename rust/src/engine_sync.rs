@@ -1,4 +1,4 @@
-use bevy::prelude::{CoreStage, ParallelSystemDescriptorCoercion, Plugin, SystemSet, SystemStage};
+use bevy::prelude::{CoreStage, ParallelSystemDescriptorCoercion, Plugin, SystemStage};
 
 use self::{
     events::{DespawnPlayingGame, SpawnGame, UserInput},

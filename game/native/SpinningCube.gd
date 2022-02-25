@@ -1,6 +1,6 @@
 extends MeshInstance
 
-var rotate_speed = 0.05
+export var rotate_speed = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

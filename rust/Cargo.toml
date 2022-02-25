@@ -14,4 +14,5 @@ dev = [
 [dependencies]
 gdnative = { git = "https://github.com/godot-rust/godot-rust.git", features = [ "formatted" ]}
 bevy = { git = "https://github.com/bevyengine/bevy.git", default-features = false }
+gdrust = { git = "https://github.com/fringelin/gdrust.git" }
 rand = "0.8.4"
