@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "",
-"class": "ECSController",
-"language": "NativeScript",
-"path": "res://native/ECSController.gdns"
-} ]
-_global_script_class_icons={
-"ECSController": ""
-}
-
 [application]
 
 config/name="{{project-name}}"
