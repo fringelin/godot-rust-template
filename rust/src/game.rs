@@ -1,4 +1,5 @@
 use bevy::prelude::{DespawnRecursiveExt, Entity};
+use gdnative::api::MainLoop;
 use gdnative::prelude::*;
 use gdrust::ecs::app::with_world;
 use gdrust::ecs::engine_sync::components::{GameNode, GodotObjRef};
@@ -26,9 +27,14 @@ impl Game {
     }
 
     #[export]
-    fn free(&mut self, owner: TRef<Spatial>) {
-        with_world(|w| {
-            w.entity_mut(self.entity.unwrap()).despawn_recursive();
-        });
+    fn _notification(&self, owner: TRef<Spatial>, what: i64) {
+        if what == 1
+            || what == MainLoop::NOTIFICATION_WM_QUIT_REQUEST
+            || what == MainLoop::NOTIFICATION_WM_GO_BACK_REQUEST
+        {
+            with_world(|w| {
+                w.entity_mut(self.entity.unwrap()).despawn_recursive();
+            });
+        }
     }
 }
